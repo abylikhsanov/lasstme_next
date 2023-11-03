@@ -1,8 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SearchOutlined, ShoppingOutlined, 
-         UserOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import Link from "next/link";
+import {
+  SearchOutlined,
+  ShoppingOutlined,
+  UserOutlined,
+  MenuOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 
 import { CategoriesMobile } from "./CategoriesMobile";
 
@@ -15,32 +21,27 @@ export default function AppHeader() {
       <div className="flex flex-row bg-white justify-between items-center p-12">
         <div className="flex flex-row">
           <div>
-            {
-              menuPressed ? (
-                <CloseOutlined 
-                className="icon"
-              onClick={() => setMenuPressed(!menuPressed)} />
-              ) : (
-                <MenuOutlined 
-                className="icon"
-              onClick={() => setMenuPressed(!menuPressed)} />
-              )
-            }
+            {menuPressed ? (
+              <CloseOutlined className="icon" onClick={() => setMenuPressed(!menuPressed)} />
+            ) : (
+              <MenuOutlined className="icon" onClick={() => setMenuPressed(!menuPressed)} />
+            )}
           </div>
           <div className="ml-8">
-            <SearchOutlined
-              className="icon"
-              onClick={() => setSearchPressed(!searchPressed)}
-            />
+            <SearchOutlined className="icon" onClick={() => setSearchPressed(!searchPressed)} />
           </div>
         </div>
 
         <div className="ml-8">
-          <h1 className="text-xl md:text-5xl text-black">lasst.me</h1>
+          <Link href="/home">
+            <h1 className="text-xl md:text-5xl text-black">lasst.me</h1>
+          </Link>
         </div>
         <div className="flex flex-row items-center">
           <div className="ml-8">
-            <UserOutlined className="icon" />
+            <Link href="/auth/profile">
+              <UserOutlined className="icon" />
+            </Link>
           </div>
           <div className="ml-8">
             <ShoppingOutlined className="icon" />
@@ -58,9 +59,7 @@ export default function AppHeader() {
           />
         </div>
       )}
-       {
-          menuPressed && (<CategoriesMobile />)
-      }
+      {menuPressed && <CategoriesMobile />}
     </div>
   );
 }

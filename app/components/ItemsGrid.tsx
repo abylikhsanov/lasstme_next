@@ -1,6 +1,9 @@
 import { Row, Col } from "antd";
 import ItemContainer from "./ItemContainer";
 import { useMediaQuery } from "react-responsive";
+import { ItemContainerProps } from "../types/ItemContainerProps";
+
+import React from "react";
 
 function chunkArray(arr: Array<any>, size: number) {
   const chunks = [];
@@ -10,17 +13,7 @@ function chunkArray(arr: Array<any>, size: number) {
   return chunks;
 }
 
-function ColumnComponent({ item }: { item: any }) {
-  return (
-    <Col xs={24} sm={12} md={8} lg={6} xl={6}>
-      <div className="bg-blue-500 h-72 w-full">
-        <ItemContainer />
-      </div>
-    </Col>
-  );
-}
-
-export default function ItemsGrid({ data }: { data: Array<any> }) {
+export default function ItemsGrid({ data }: { data: Array<ItemContainerProps> }) {
   let spanValue = 4;
   const dataByRow = chunkArray(data, spanValue);
   const isXs = useMediaQuery({ maxWidth: 575 });
@@ -44,7 +37,7 @@ export default function ItemsGrid({ data }: { data: Array<any> }) {
           return (
             <Col span={spanValue} key={index}>
               <div className="h-96 w-60">
-                <ItemContainer />
+                <ItemContainer itemContainer={item}/>
               </div>
             </Col>
           );
